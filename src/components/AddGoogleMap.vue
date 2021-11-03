@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-
+      <p>This is a google provide autocomplete search bar</p>
       <label>
         <gmap-autocomplete @place_changed="initMarker"></gmap-autocomplete>
 
@@ -12,7 +12,7 @@
     </div>
     <br>
     <gmap-map
-        :zoom="14"
+        :zoom="5"
         :center="center"
         style="width:100%;  height: 600px;"
     >
@@ -28,7 +28,9 @@
 
 <script>
 
-
+import SearchAutocomplete from "@/components/SearchAutocomplete";
+//import * as google from "vue2-google-maps"
+//import { eventBus } from '@/event-bus.js';
 
 export default {
   name: "AddGoogleMap",
@@ -46,27 +48,27 @@ export default {
     };
   },
 
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside);
+  /*
+  // receive state data from SearchAutocomplete
+  mounted: function() {
+    eventBus.$on('sendStateData', (payload) => {
+      this.renderStateMap(payload);
+    })
   },
-  destroyed() {
-    document.removeEventListener('click', this.handleClickOutside);
-  },
+
+   */
 
   methods: {
     initMarker(loc) {
       this.existingPlace = loc;
-    },
-    props:{
-      latitude: String,
-      longitude: String
+      console.log(loc);
     },
 
     addLocationMarker() {
-      //this.existingPlace = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
-      console.log(this.existingPlace);
+      console.log(SearchAutocomplete.existingPlace);
       if (this.existingPlace) {
         const marker = {
+
           lat: this.existingPlace.geometry.location.lat(),
           lng: this.existingPlace.geometry.location.lng()
         };
@@ -78,17 +80,17 @@ export default {
       }
 
     },
+    /*
+    renderStateMap(myStateData) {
+      myStateData.setMap(this.map);
 
-    handleClickOutside(event) {
-      if (!this.$el.contains(event.target)) {
-        this.isOpen = false;
-      }
+      // and pass clicks on to the underlying map
+      myStateData.addListener('click', (event) => {
+        google.maps.event.trigger(this.map, 'click', event);
+      });
     },
-    onEnter() {
-      this.search = this.results[this.arrowCounter];
-      this.arrowCounter = -1;
-      this.isOpen = false;
-    },
+
+     */
 
     locateGeoLocation: function() {
       navigator.geolocation.getCurrentPosition(res => {
