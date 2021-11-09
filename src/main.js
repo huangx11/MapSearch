@@ -15,7 +15,6 @@ Vue.use(VueGoogleMaps, {
     key: "AIzaSyAW-wOGBvpTNrxbYSWkLdnabFcYSx6G_LU",
     libraries: "places",
     country: "US",
-    region: "administrative_area_level_1"
   }
 });
 

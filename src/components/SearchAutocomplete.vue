@@ -28,10 +28,14 @@
 </template>
 
 <script>
+/*
+import { eventBus } from '@/event-bus.js';
+import axios from 'axios';
+import * as google from "vue2-google-maps"
+import AddGoogleMap from "@/components/AddGoogleMap";
+ */
 
-//import { eventBus } from '@/event-bus.js';
-//import axios from 'axios';
-//import * as google from "vue2-google-maps"
+import axios from "axios";
 
 export default {
 
@@ -50,6 +54,7 @@ export default {
       search: '',
       results: [],
       isOpen: false,
+
       array: [
         this.results
       ]
@@ -81,55 +86,19 @@ export default {
         this.isOpen = false;
       }
     },
+    // when user press add button, it will send a get request to the backend and return the paths of state
     show() {
       // results[0] is a string user input
       this.results = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
       console.log(this.results);
-      //this.getStateData(this.results);
 
+      // using axios to get states' border
+      axios
+          .get('http://localhost:4000/' + this.results[0])
+          .then(response => (this.AddGoogleMap.data().paths = response))
+          .catch(error => console.log(error))
     },
 
-    /*
-    // try to use
-    getStateData(theState) {
-
-      let apiPath = "https://nominatim.openstreetmap.org/search.php";
-
-      let params = {
-        q: theState,
-        polygon_geojson: 1,
-        format: "json"
-      };
-
-      // use axios to send api request
-      axios.get(apiPath, { params: params }  )
-          .then(response => {
-            let geoJSONDataChunk = response.data[0];
-
-            const geoConf = {
-              "type": "FeatureCollection",
-              "features": [
-                { "type": "Feature",
-                  "geometry": geoJSONDataChunk.geojson,
-                  "id": "state"
-                }
-              ]
-            };
-
-            this.myStateData = new google.maps.Data();
-            console.log(this.myStateData);
-            this.myStateData.addGeoJson(geoConf, "State");
-            this.myStateData.setStyle({
-              fillColor: 'green',
-              fillOpaState: 0.1,
-              strokeWeight: 1
-            });
-
-            // send data to AddGoogleMap.vue
-            eventBus.$emit('sendStateData', this.myStateData);
-          })
-    },
-       */
   },
 
 

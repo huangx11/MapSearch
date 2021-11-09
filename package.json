@@ -11,6 +11,7 @@
     "@trevoreyre/autocomplete-js": "^2.2.0",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "graphql": "^16.0.1",
     "scriptjs": "^2.5.9",
     "v-autocomplete": "^1.8.2",
     "vue": "^2.6.11",

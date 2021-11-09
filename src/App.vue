@@ -1,5 +1,6 @@
 
 <template>
+
   <div id="app">
     <SearchAutocomplete
         :items="[
@@ -66,14 +67,13 @@
 
 <script>
 import AddGoogleMap from "./components/AddGoogleMap";
-import SearchAutocomplete from './components/SearchAutocomplete.vue'
+import SearchAutocomplete from './components/SearchAutocomplete.vue';
 
 export default {
   name: 'App',
   components: {
     SearchAutocomplete,
     AddGoogleMap,
-
   },
 }
 </script>
