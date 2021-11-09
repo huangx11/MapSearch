@@ -91,7 +91,6 @@ export default {
       // results[0] is a string user input
       this.results = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
       console.log(this.results);
-
       // using axios to get states' border
       axios
           .get('http://localhost:4000/' + this.results[0])
