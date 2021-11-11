@@ -23,9 +23,7 @@
       </li>
     </ul>
     <button @click="show">Add</button>
-    <div>
-      {{states.border}}
-    </div>
+
   </div>
 
 </template>
@@ -50,12 +48,26 @@ export default {
       }
     }`,
   },
+  /*
+  // using Query with parameters
+  apollo: {
+    states: gql`query($state: String!) {
+      states(state: $state) {
+        id
+        state
+        border
+      }
+    }`,
+  },
+
+   */
   props: {
     items: {
       type: Array,
       required: false,
       default: () => [],
       address: Array,
+
     },
   },
   data() {
@@ -63,7 +75,6 @@ export default {
       search: '',
       results: [],
       isOpen: false,
-
       array: [
         this.results
       ]
@@ -99,10 +110,12 @@ export default {
     show() {
       // results[0] is a string user input
       this.results = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
-      console.log(this.results[0]);
-      // using axios to get states' border
+      console.log("user input:" + this.results[0]);
+      console.log("result from backend:" + this.states.state);
+      console.log(this.states.border);
 
-      //this.AddGoogleMap.data.paths.push(this.state.border)
+      //this.stateName = this.results[0];
+
 
 
     },

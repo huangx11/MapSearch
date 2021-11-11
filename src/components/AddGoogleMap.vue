@@ -1718,6 +1718,7 @@ export default {
 
   },
 
+
   methods: {
     /*
     initMarker(loc) {
