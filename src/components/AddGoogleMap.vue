@@ -1,16 +1,14 @@
 <template>
   <div>
-    <div>
 
-    </div>
     <br>
     <gmap-map
         :zoom="5"
         :center="center"
         style="width:100%;  height: 600px;"
     >
-      <gmap-polygon :paths="paths">
-      </gmap-polygon>
+      <gmap-polygon :paths=paths>
+      </gmap-polygon >
       <gmap-marker
           :key="index"
           v-for="(m, index) in locationMarkers"
@@ -27,10 +25,19 @@
 //import SearchAutocomplete from "@/components/SearchAutocomplete";
 import * as google from "vue2-google-maps"
 import { eventBus } from '@/event-bus.js';
+import gql from "graphql-tag";
 //import axios from "axios";
 
 export default {
   name: "AddGoogleMap",
+  apollo: {
+    states: gql`query {
+      states(id: "Arizona") {
+        state
+        border
+      }
+    }`,
+  },
 
 
   data() {

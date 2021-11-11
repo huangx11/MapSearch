@@ -39,7 +39,7 @@
         'New York',
         'North Carolina',
         'North Dakota',
-        'Ohio, USA',
+        'Ohio',
         'Oklahoma',
         'Oregon',
         'Pennsylvania',

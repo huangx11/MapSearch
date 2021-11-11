@@ -5,10 +5,23 @@ import Autocomplete from 'v-autocomplete'
 import 'v-autocomplete/dist/v-autocomplete.css'
 import CustomGoogleAutocomplete from 'vue-custom-google-autocomplete'
 
+import ApolloClient from 'apollo-boost'
+import VueApollo from 'vue-apollo'
+
 import * as VueGoogleMaps from "vue2-google-maps"
 
 Vue.config.productionTip = false
 Vue.use(Autocomplete)
+
+const apolloClient = new ApolloClient({
+  // You should use an absolute URL here
+  uri: 'http://localhost:4000/'
+})
+
+Vue.use(VueApollo)
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
+})
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -19,7 +32,10 @@ Vue.use(VueGoogleMaps, {
 });
 
 new Vue({
+
   render: h => h(App),
+  apolloProvider
+
 
 }).$mount('#app')
 

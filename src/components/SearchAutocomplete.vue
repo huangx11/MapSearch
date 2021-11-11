@@ -23,6 +23,9 @@
       </li>
     </ul>
     <button @click="show">Add</button>
+    <div>
+      {{states.border}}
+    </div>
   </div>
 
 </template>
@@ -34,13 +37,19 @@ import axios from 'axios';
 import * as google from "vue2-google-maps"
 import AddGoogleMap from "@/components/AddGoogleMap";
  */
-
-import axios from "axios";
+import gql from 'graphql-tag'
 
 export default {
 
   name: 'SearchAutocomplete',
-
+  apollo: {
+    states: gql`query {
+      states(id: "Arizona") {
+        state
+        border
+      }
+    }`,
+  },
   props: {
     items: {
       type: Array,
@@ -90,12 +99,12 @@ export default {
     show() {
       // results[0] is a string user input
       this.results = this.items.filter(item => item.toLowerCase().indexOf(this.search.toLowerCase()) > -1);
-      console.log(this.results);
+      console.log(this.results[0]);
       // using axios to get states' border
-      axios
-          .get('http://localhost:4000/' + this.results[0])
-          .then(response => (this.AddGoogleMap.data().paths = response))
-          .catch(error => console.log(error))
+
+      //this.AddGoogleMap.data.paths.push(this.state.border)
+
+
     },
 
   },
